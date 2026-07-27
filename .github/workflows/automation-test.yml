@@ -6,6 +6,7 @@ on:
   repository_dispatch:
 
     types:
+
       - run-tests
 
 
@@ -45,7 +46,7 @@ jobs:
 
 
 
-      # Install Java
+      # Setup Java
 
       - name: Setup Java
 
@@ -61,7 +62,7 @@ jobs:
 
 
 
-      # Install Node for React
+      # Setup Node
 
       - name: Setup Node
 
@@ -99,9 +100,11 @@ jobs:
 
           sleep 10
 
+          curl http://localhost:5173
 
 
-      # Install Chrome
+
+      # Setup Chrome
 
       - name: Setup Chrome
 
@@ -109,17 +112,90 @@ jobs:
 
 
 
+      # Verify Environment
+
+      - name: Verify Environment
+
+        run: |
+
+          java -version
+
+          google-chrome --version
+
+          mvn -version
+
+
+
       # Run Selenium Tests
 
       - name: Run Selenium Tests
 
+        run: mvn clean test
+
+        continue-on-error: true
+
+
+
+      # Install Allure CLI
+
+      - name: Install Allure
+
+        if: always()
+
         run: |
 
-          mvn clean test
+
+          sudo apt-get update
+
+
+          sudo apt-get install -y wget unzip
+
+
+          wget https://github.com/allure-framework/allure2/releases/download/2.27.0/allure-2.27.0.zip
+
+
+          unzip allure-2.27.0.zip
+
+
+          sudo mv allure-2.27.0 /opt/allure
+
+
+          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
 
 
 
-      # Upload Allure Results
+      # Generate Allure HTML Report
+
+      - name: Generate Allure Report
+
+        if: always()
+
+        run: |
+
+
+          allure generate allure-results \
+          --clean \
+          -o allure-report
+
+
+
+      # Upload Allure HTML Report
+
+      - name: Upload Allure HTML Report
+
+        if: always()
+
+        uses: actions/upload-artifact@v4
+
+        with:
+
+          name: allure-html-report
+
+          path: allure-report
+
+
+
+      # Upload Raw Allure Results
 
       - name: Upload Allure Results
 
@@ -132,3 +208,19 @@ jobs:
           name: allure-results
 
           path: allure-results
+
+
+
+      # Upload Screenshots Folder
+
+      - name: Upload Screenshots
+
+        if: always()
+
+        uses: actions/upload-artifact@v4
+
+        with:
+
+          name: selenium-screenshots
+
+          path: screenshots

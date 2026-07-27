@@ -19,14 +19,6 @@ public class TodoTest extends BaseTest{
 	
 	
 	@Test(priority=2)
-	public void verifyTotalTaskCount() {
-		TodoPage todoPage = new TodoPage(driver);
-		int totalTasks = todoPage.totalTaskCount();
-		System.out.println("Total: "+totalTasks);
-		Assert.assertEquals(totalTasks, 2);
-	}
-	
-	@Test(priority=3)
 	public void verifyDashboardText() {
 		TodoPage todoPage = new TodoPage(driver);
 		String dashText = todoPage.isDashboardTextCorrect();
@@ -34,6 +26,14 @@ public class TodoTest extends BaseTest{
 		Assert.assertEquals(dashText, "TODO");
 	}
 	
+	@Test(priority=3)
+	
+	public void verifyTotalTaskCount() {
+		TodoPage todoPage = new TodoPage(driver);
+		int totalTasks = todoPage.totalTaskCount();
+		System.out.println("Total: "+totalTasks);
+		Assert.assertEquals(totalTasks, 2);
+	}
 
 
 }

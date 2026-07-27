@@ -10,59 +10,86 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverFactory {
 
-    private static WebDriver driver;
+	private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    public static WebDriver initializeDriver(String browser) {
+	public static WebDriver initializeDriver(String browser) {
 
-        boolean isGitHubActions =
-                "true".equalsIgnoreCase(System.getenv("GITHUB_ACTIONS"));
+		boolean isGitHubActions = "true".equalsIgnoreCase(System.getenv("GITHUB_ACTIONS"));
 
-        switch (browser.toLowerCase()) {
+		WebDriver webDriver;
 
-            case "chrome":
+		switch (browser.toLowerCase()) {
 
-                ChromeOptions chromeOptions = new ChromeOptions();
+		case "chrome":
 
-                if (isGitHubActions) {
-                    chromeOptions.addArguments("--headless=new");
-                    chromeOptions.addArguments("--no-sandbox");
-                    chromeOptions.addArguments("--disable-dev-shm-usage");
-                    chromeOptions.addArguments("--disable-gpu");
-                    chromeOptions.addArguments("--window-size=1920,1080");
-                }
+			ChromeOptions chromeOptions = new ChromeOptions();
 
-                driver = new ChromeDriver(chromeOptions);
-                break;
+			if (isGitHubActions) {
 
-            case "firefox":
-                driver = new FirefoxDriver();
-                break;
+				chromeOptions.addArguments("--headless=new");
 
-            case "edge":
-                driver = new EdgeDriver();
-                break;
+				chromeOptions.addArguments("--no-sandbox");
 
-            default:
-                throw new IllegalArgumentException("Invalid browser: " + browser);
-        }
+				chromeOptions.addArguments("--disable-dev-shm-usage");
 
-        if (!isGitHubActions) {
-            driver.manage().window().maximize();
-        }
+				chromeOptions.addArguments("--disable-gpu");
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+				chromeOptions.addArguments("--window-size=1920,1080");
 
-        return driver;
-    }
+			}
 
-    public static WebDriver getDriver() {
-        return driver;
-    }
+			webDriver = new ChromeDriver(chromeOptions);
 
-    public static void quitDriver() {
-        if (driver != null) {
-            driver.quit();
-            driver = null;
-        }
-    }
+			break;
+
+		case "firefox":
+
+			webDriver = new FirefoxDriver();
+
+			break;
+
+		case "edge":
+
+			webDriver = new EdgeDriver();
+
+			break;
+
+		default:
+
+			throw new IllegalArgumentException("Invalid browser: " + browser);
+
+		}
+
+		if (!isGitHubActions) {
+
+			webDriver.manage().window().maximize();
+
+		}
+
+		webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+		driver.set(webDriver);
+
+		return webDriver;
+
+	}
+
+	public static WebDriver getDriver() {
+
+		return driver.get();
+
+	}
+
+	public static void quitDriver() {
+
+		if (driver.get() != null) {
+
+			driver.get().quit();
+
+			driver.remove();
+
+		}
+
+	}
+
 }

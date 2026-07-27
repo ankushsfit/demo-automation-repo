@@ -1,0 +1,134 @@
+name: Selenium Automation Tests
+
+
+on:
+
+  repository_dispatch:
+
+    types:
+      - run-tests
+
+
+
+jobs:
+
+
+  selenium-test:
+
+
+    runs-on: ubuntu-latest
+
+
+
+    steps:
+
+
+      # Checkout Selenium automation repository
+
+      - name: Checkout Automation Code
+
+        uses: actions/checkout@v4
+
+
+
+      # Checkout React application repository
+
+      - name: Checkout Application Code
+
+        uses: actions/checkout@v4
+
+        with:
+
+          repository: ankushsfit/demo-application-repo
+
+          path: application
+
+
+
+      # Install Java
+
+      - name: Setup Java
+
+        uses: actions/setup-java@v4
+
+        with:
+
+          java-version: '17'
+
+          distribution: 'temurin'
+
+          cache: maven
+
+
+
+      # Install Node for React
+
+      - name: Setup Node
+
+        uses: actions/setup-node@v4
+
+        with:
+
+          node-version: '20'
+
+          cache: npm
+
+          cache-dependency-path: application/frontend/package-lock.json
+
+
+
+      # Install React dependencies
+
+      - name: Install Frontend Dependencies
+
+        working-directory: application/frontend
+
+        run: npm install
+
+
+
+      # Start React Application
+
+      - name: Start React Application
+
+        working-directory: application/frontend
+
+        run: |
+
+          npm run dev -- --host 0.0.0.0 &
+
+          sleep 10
+
+
+
+      # Install Chrome
+
+      - name: Setup Chrome
+
+        uses: browser-actions/setup-chrome@v1
+
+
+
+      # Run Selenium Tests
+
+      - name: Run Selenium Tests
+
+        run: |
+
+          mvn clean test
+
+
+
+      # Upload Allure Results
+
+      - name: Upload Allure Results
+
+        if: always()
+
+        uses: actions/upload-artifact@v4
+
+        with:
+
+          name: allure-results
+
+          path: allure-results

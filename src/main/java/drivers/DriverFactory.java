@@ -4,10 +4,9 @@ import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverFactory {
 
@@ -15,23 +14,42 @@ public class DriverFactory {
 
     public static WebDriver initializeDriver(String browser) {
 
-        if (browser.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
+        boolean isGitHubActions =
+                "true".equalsIgnoreCase(System.getenv("GITHUB_ACTIONS"));
 
-        } else if (browser.equalsIgnoreCase("firefox")) {
-            WebDriverManager.firefoxdriver().setup();
-            driver = new FirefoxDriver();
+        switch (browser.toLowerCase()) {
 
-        } else if (browser.equalsIgnoreCase("edge")) {
-            WebDriverManager.edgedriver().setup();
-            driver = new EdgeDriver();
+            case "chrome":
 
-        } else {
-            throw new IllegalArgumentException("Invalid browser: " + browser);
+                ChromeOptions chromeOptions = new ChromeOptions();
+
+                if (isGitHubActions) {
+                    chromeOptions.addArguments("--headless=new");
+                    chromeOptions.addArguments("--no-sandbox");
+                    chromeOptions.addArguments("--disable-dev-shm-usage");
+                    chromeOptions.addArguments("--disable-gpu");
+                    chromeOptions.addArguments("--window-size=1920,1080");
+                }
+
+                driver = new ChromeDriver(chromeOptions);
+                break;
+
+            case "firefox":
+                driver = new FirefoxDriver();
+                break;
+
+            case "edge":
+                driver = new EdgeDriver();
+                break;
+
+            default:
+                throw new IllegalArgumentException("Invalid browser: " + browser);
         }
 
-        driver.manage().window().maximize();
+        if (!isGitHubActions) {
+            driver.manage().window().maximize();
+        }
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         return driver;

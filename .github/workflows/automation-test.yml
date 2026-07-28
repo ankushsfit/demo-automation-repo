@@ -43,6 +43,17 @@ jobs:
 
 
 
+      # Debug workflow
+      
+      - name: Check workflow file
+        run: |
+          echo "Current commit:"
+          git rev-parse HEAD
+
+          echo "Workflow content:"
+          grep -A10 -B5 "Clean Previous Results" .github/workflows/automation-test.yml
+
+
       # Checkout React application repository
 
       - name: Checkout Application Code

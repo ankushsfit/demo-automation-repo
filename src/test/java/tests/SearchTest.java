@@ -52,7 +52,7 @@ public class SearchTest extends BaseTest {
 		System.out.println("verifyTaskAfterSearch running on thread: " + Thread.currentThread().getId());
 		SearchPage searchPage = new SearchPage(driver);
 		String taskAfterSearchName = searchPage.tasksAfterSearch();
-		Assert.assertEquals(taskAfterSearchName, "Need to practice on github actions");
+		Assert.assertEquals(taskAfterSearchName, "Need to practice on github action");
 
 	}
 

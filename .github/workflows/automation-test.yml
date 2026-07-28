@@ -150,7 +150,7 @@ jobs:
 
           echo "===== DriverFactory.java ====="
 
-          sed -n '1,150p' src/test/java/drivers/DriverFactory.java
+          sed -n '1,150p' src/test/main/drivers/DriverFactory.java
 
 
           echo "===== Find BaseTest Files ====="

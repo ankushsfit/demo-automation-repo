@@ -171,7 +171,15 @@ jobs:
       
       - name: Show Maven test classes
         run: |
-          find . -type f -name "*.class" || true
+          find . -type f -name "*.class" || tru
+          
+      # Clean previous test results
+      
+      - name: Clean Previous Results
+        run: |
+          rm -rf allure-results
+          rm -rf allure-report
+          rm -rf targete
 
       # Run Selenium Tests
 

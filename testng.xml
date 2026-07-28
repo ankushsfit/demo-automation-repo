@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Todo Application Suite">
 
-	 <listeners>
-	
-	    <listener class-name="listeners.TestListener"/>
-	
-	</listeners>
-	<test thread-count="5" name="Todo Tests">
-	  <classes>
-	    <class name="tests.TodoTest"/>
-	  </classes>
-	</test> <!-- Test -->
-</suite> <!-- Suite -->
+<suite name="Todo Application Suite"
+       parallel="classes"
+       thread-count="5">
+
+    <listeners>
+        <listener class-name="listeners.TestListener"/>
+    </listeners>
+
+    <test name="Todo Tests">
+
+        <classes>
+            <class name="tests.TodoTest"/>
+            <class name="tests.SearchTest"/>
+        </classes>
+
+    </test>
+
+</suite>

@@ -4,9 +4,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
+import pages.SearchPage;
 import pages.TodoPage;
 
-public class TodoTest extends BaseTest {
+public class SearchTest extends BaseTest {
 
 	@Test(priority = 1)
 	public void verifyTodoTaskCreation() {
@@ -36,6 +37,23 @@ public class TodoTest extends BaseTest {
 		int totalTasks = todoPage.totalTaskCount();
 		System.out.println("Total Tasks: " + totalTasks);
 		Assert.assertEquals(totalTasks, 2);
+	}
+
+	@Test(priority = 4)
+	public void verifySearchTask() {
+		System.out.println("verifySearchTask running on thread: " + Thread.currentThread().getId());
+		SearchPage searchPage = new SearchPage(driver);
+		searchPage.enterTaskToSearch("Need to practice on github actions");
+
+	}
+
+	@Test(priority = 5)
+	public void verifyTaskAfterSearch() {
+		System.out.println("verifyTaskAfterSearch running on thread: " + Thread.currentThread().getId());
+		SearchPage searchPage = new SearchPage(driver);
+		String taskAfterSearchName = searchPage.tasksAfterSearch();
+		Assert.assertEquals(taskAfterSearchName, "Need to practice on github actions");
+
 	}
 
 }

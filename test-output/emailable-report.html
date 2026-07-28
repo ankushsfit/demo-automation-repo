@@ -8,13 +8,25 @@
 <body>
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
-<tr><th colspan="8">Default suite</th></tr>
-<tr><td><a href="#t0">Default test</a></td><td class="num">3</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">2,419</td><td></td><td></td></tr>
+<tr><th colspan="8">Todo Application Suite</th></tr>
+<tr><td><a href="#t0">Todo Tests</a></td><td class="num">7</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">8,908</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Default suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Default test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="3">tests.TodoTest</td><td><a href="#m0">verifyDashboardText</a></td><td rowspan="1">1785155113165</td><td rowspan="1">22</td></tr><tr class="passedeven"><td><a href="#m1">verifyTodoTaskCreation</a></td><td rowspan="1">1785155112724</td><td rowspan="1">390</td></tr><tr class="passedeven"><td><a href="#m2">verifyTotalTaskCount</a></td><td rowspan="1">1785155113191</td><td rowspan="1">11</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Todo Application Suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Todo Tests &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">tests.SearchTest</td><td><a href="#m0">verifyTaskAfterSearch</a></td><td rowspan="1">1785243108607</td><td rowspan="1">542</td></tr><tr><th colspan="4">Todo Tests &#8212; passed</th></tr><tr class="passedeven"><td rowspan="4">tests.SearchTest</td><td><a href="#m1">verifyDashboardText</a></td><td rowspan="1">1785243106309</td><td rowspan="1">558</td></tr><tr class="passedeven"><td><a href="#m2">verifySearchTask</a></td><td rowspan="1">1785243107946</td><td rowspan="1">657</td></tr><tr class="passedeven"><td><a href="#m3">verifyTodoTaskCreation</a></td><td rowspan="1">1785243103531</td><td rowspan="1">2708</td></tr><tr class="passedeven"><td><a href="#m4">verifyTotalTaskCount</a></td><td rowspan="1">1785243106870</td><td rowspan="1">1068</td></tr><tr class="passedodd"><td rowspan="3">tests.TodoTest</td><td><a href="#m5">verifyDashboardText</a></td><td rowspan="1">1785243106309</td><td rowspan="1">558</td></tr><tr class="passedodd"><td><a href="#m6">verifyTodoTaskCreation</a></td><td rowspan="1">1785243103537</td><td rowspan="1">2727</td></tr><tr class="passedodd"><td><a href="#m7">verifyTotalTaskCount</a></td><td rowspan="1">1785243106871</td><td rowspan="1">1067</td></tr></tbody>
 </table>
-<h2>Default test</h2><h3 id="m0">tests.TodoTest#verifyDashboardText</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m1">tests.TodoTest#verifyTodoTaskCreation</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m2">tests.TodoTest#verifyTotalTaskCount</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>Todo Tests</h2><h3 id="m0">tests.SearchTest#verifyTaskAfterSearch</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: expected [Hi world] but found [Need to practice on github actions]
+	at tests.SearchTest.verifyTaskAfterSearch(SearchTest.java:55)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+... Removed 17 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">tests.SearchTest#verifyDashboardText</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">tests.SearchTest#verifySearchTask</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">tests.SearchTest#verifyTodoTaskCreation</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">tests.SearchTest#verifyTotalTaskCount</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">tests.TodoTest#verifyDashboardText</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m6">tests.TodoTest#verifyTodoTaskCreation</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m7">tests.TodoTest#verifyTotalTaskCount</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>

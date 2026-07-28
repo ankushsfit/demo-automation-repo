@@ -1,5 +1,3 @@
-Here is your pipeline with only the required debug steps added before the Selenium test execution. I have not changed anything else.
-
 name: Selenium Automation Tests
 
 
@@ -319,6 +317,3 @@ jobs:
         id: deployment
 
         uses: actions/deploy-pages@v4
-
-
-After the next run, check the "Debug Source Files" section in GitHub Actions logs. It will show the exact BaseTest.java and DriverFactory.java that the runner is using.

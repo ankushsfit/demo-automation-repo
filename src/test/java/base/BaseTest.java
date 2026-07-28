@@ -1,7 +1,6 @@
 package base;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import drivers.DriverFactory;
@@ -19,11 +18,11 @@ public class BaseTest {
 
 	}
 
-	@AfterClass
-	public void tearDown() {
-
-		DriverFactory.quitDriver();
-
-	}
+//	@AfterClass
+//	public void tearDown() {
+//
+//		DriverFactory.quitDriver();
+//
+//	}
 
 }

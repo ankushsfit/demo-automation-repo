@@ -136,50 +136,19 @@ jobs:
           mvn -version
 
 
+          # Clean previous test artifacts
 
-      # Debug Source Files
-
-      - name: Debug Source Files
-
-        run: |
-
-          echo "===== BaseTest.java ====="
-
-          sed -n '1,100p' src/test/java/base/BaseTest.java
-
-
-          echo "===== DriverFactory.java ====="
-
-          sed -n '1,150p' src/main/java/drivers/DriverFactory.java
-
-
-          echo "===== Find BaseTest Files ====="
-
-          find . -name "BaseTest.java" -o -name "BaseTest.class"
-          find . \( -name "BaseTest.java" -o -name "BaseTest.class" -o -name "DriverFactory.java" -o -name "DriverFactory.class" \)
-
-
-
-      - name: Clean compiled files
-        run: |
-           rm -rf target
-           
-      - name: Search quitDriver reference
-        run: |
-          grep -R "quitDriver" . || true
-      
-      
-      - name: Show Maven test classes
-        run: |
-          find . -type f -name "*.class" || tru
-          
-      # Clean previous test results
-      
       - name: Clean Previous Results
+
         run: |
+
           rm -rf allure-results
+
           rm -rf allure-report
-          rm -rf targete
+
+          rm -rf target
+          
+  e
 
       # Run Selenium Tests
 

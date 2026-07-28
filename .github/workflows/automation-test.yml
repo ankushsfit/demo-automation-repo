@@ -156,8 +156,13 @@ jobs:
           echo "===== Find BaseTest Files ====="
 
           find . -name "BaseTest.java" -o -name "BaseTest.class"
+          find . \( -name "BaseTest.java" -o -name "BaseTest.class" -o -name "DriverFactory.java" -o -name "DriverFactory.class" \)
 
 
+
+      - name: Clean compiled files
+        run: |
+           rm -rf target
 
       # Run Selenium Tests
 

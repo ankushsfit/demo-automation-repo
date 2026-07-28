@@ -208,8 +208,8 @@ jobs:
         run: |
 
           allure generate allure-results \
-          --clean \
-          -o allure-report
+             --clean \
+             -o allure-report
 
 
 

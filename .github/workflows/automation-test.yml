@@ -147,8 +147,7 @@ jobs:
           rm -rf allure-report
 
           rm -rf target
-          
-  e
+          e
 
       # Run Selenium Tests
 

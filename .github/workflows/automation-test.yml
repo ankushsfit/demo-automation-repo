@@ -163,6 +163,15 @@ jobs:
       - name: Clean compiled files
         run: |
            rm -rf target
+           
+      - name: Search quitDriver reference
+        run: |
+          grep -R "quitDriver" . || true
+      
+      
+      - name: Show Maven test classes
+        run: |
+          find . -type f -name "*.class" || true
 
       # Run Selenium Tests
 

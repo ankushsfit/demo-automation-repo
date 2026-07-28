@@ -136,7 +136,7 @@ jobs:
           mvn -version
 
 
-          # Clean previous test artifacts
+       # Clean previous test artifacts
 
       - name: Clean Previous Results
 

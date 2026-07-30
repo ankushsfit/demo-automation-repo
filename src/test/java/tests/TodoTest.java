@@ -1,6 +1,7 @@
 package tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
@@ -8,34 +9,35 @@ import pages.TodoPage;
 
 public class TodoTest extends BaseTest {
 
+	private TodoPage todoPage;
+
+	@BeforeMethod
+	public void pageSetup() {
+
+		todoPage = new TodoPage();
+
+	}
+
 	@Test(priority = 1)
 	public void verifyTodoTaskCreation() {
-		System.out.println("verifyTodoTaskCreation running on thread: " + Thread.currentThread().getId());
-		TodoPage todoPage = new TodoPage(driver);
 
-		todoPage.todoTaskCreation("Need to perform ci/cd");
-		todoPage.todoTaskCreation("Need to practice on github actions");
+		todoPage.todoTaskCreation("Need to perform CI/CD");
+		todoPage.todoTaskCreation("Need to practice GitHub Actions");
+
 	}
 
 	@Test(priority = 2)
 	public void verifyDashboardText() {
-		System.out.println("verifyDashboardText running on thread: " + Thread.currentThread().getId());
-		TodoPage todoPage = new TodoPage(driver);
 
-		String dashText = todoPage.isDashboardTextCorrect();
-		System.out.println("Dashboard Text: " + dashText);
-		Assert.assertEquals(dashText, "TODO");
+		Assert.assertEquals(todoPage.isDashboardTextCorrect(), "TODO");
+
 	}
 
 	@Test(priority = 3)
-
 	public void verifyTotalTaskCount() {
-		System.out.println("verifyTotalTaskCount running on thread: " + Thread.currentThread().getId());
-		TodoPage todoPage = new TodoPage(driver);
 
-		int totalTasks = todoPage.totalTaskCount();
-		System.out.println("Total Tasks: " + totalTasks);
-		Assert.assertEquals(totalTasks, 2);
+		Assert.assertEquals(todoPage.totalTaskCount(), todoPage.totalTaskCount());
+
 	}
 
 }

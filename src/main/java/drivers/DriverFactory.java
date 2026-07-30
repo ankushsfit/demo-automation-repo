@@ -10,9 +10,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverFactory {
 
-	private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+	private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-	public static WebDriver initializeDriver(String browser) {
+	private DriverFactory() {
+	}
+
+	public static void initializeDriver(String browser) {
 
 		boolean isGitHubActions = "true".equalsIgnoreCase(System.getenv("GITHUB_ACTIONS"));
 
@@ -22,74 +25,59 @@ public class DriverFactory {
 
 		case "chrome":
 
-			ChromeOptions chromeOptions = new ChromeOptions();
+			ChromeOptions options = new ChromeOptions();
 
 			if (isGitHubActions) {
 
-				chromeOptions.addArguments("--headless=new");
-
-				chromeOptions.addArguments("--no-sandbox");
-
-				chromeOptions.addArguments("--disable-dev-shm-usage");
-
-				chromeOptions.addArguments("--disable-gpu");
-
-				chromeOptions.addArguments("--window-size=1920,1080");
+				options.addArguments("--headless=new");
+				options.addArguments("--no-sandbox");
+				options.addArguments("--disable-dev-shm-usage");
+				options.addArguments("--disable-gpu");
+				options.addArguments("--window-size=1920,1080");
 
 			}
 
-			webDriver = new ChromeDriver(chromeOptions);
-
+			webDriver = new ChromeDriver(options);
 			break;
 
 		case "firefox":
 
 			webDriver = new FirefoxDriver();
-
 			break;
 
 		case "edge":
 
 			webDriver = new EdgeDriver();
-
 			break;
 
 		default:
-
-			throw new IllegalArgumentException("Invalid browser: " + browser);
+			throw new IllegalArgumentException("Invalid browser : " + browser);
 
 		}
 
 		if (!isGitHubActions) {
-
 			webDriver.manage().window().maximize();
-
 		}
 
 		webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
 		driver.set(webDriver);
 
-		return webDriver;
-
+		System.out.println("Driver initialized: " + Thread.currentThread().getId());
 	}
 
 	public static WebDriver getDriver() {
-
 		return driver.get();
-
 	}
 
-//	public static void quitDriver() {
-//
-//		if (driver.get() != null) {
-//
-//			driver.get().quit();
-//
-//			driver.remove();
-//
-//		}
-//
-//	}
+	public static void quitDriver() {
+
+		if (driver.get() != null) {
+
+			driver.get().quit();
+			driver.remove();
+
+		}
+	}
 
 }

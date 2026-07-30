@@ -5,10 +5,14 @@
     <classes>
       <class name="tests.SearchTest">
         <methods>
-          <include name="setUp"/>
+          <include name="setup"/>
+          <include name="tearDown"/>
           <include name="verifyTotalTaskCount"/>
-          <include name="verifyTaskAfterSearch"/>
+          <include name="verifyDashboardText"/>
+          <include name="verifyTodoTaskCreation"/>
           <include name="verifySearchTask"/>
+          <include name="verifyTaskAfterSearch"/>
+          <include name="pageSetup"/>
         </methods>
       </class> <!-- tests.SearchTest -->
     </classes>

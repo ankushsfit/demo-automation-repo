@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import drivers.DriverFactory;
 import utils.HighlightElement;
 
 public class TodoPage {
@@ -20,10 +21,12 @@ public class TodoPage {
 	private By dashboardName = By.cssSelector("p.eyebrow");
 
 	// Constructor
-	public TodoPage(WebDriver driver) {
-		this.driver = driver;
-		this.highlightElement = new HighlightElement(this.driver);
-//        this.waitUtils = new WaitUtils(driver);
+	public TodoPage() {
+
+		this.driver = DriverFactory.getDriver();
+		this.highlightElement = new HighlightElement(driver);
+		System.out.println("TodoPage driver: " + driver + " Thread: " + Thread.currentThread().getId());
+
 	}
 
 	// Actions
